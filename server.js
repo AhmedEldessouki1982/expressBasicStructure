@@ -12,11 +12,15 @@ import './db/Connect.js';
 //importing and configuring the dot
 import * as dotenv from 'dotenv';
 dotenv.config();
+//importing not found message page responce middle ware
+import notfound from './middleware/notFound.js'
 //port
 const port = process.env.backEndPort || 8000;
 
 
+
 //middleware code
+
 app.use (
     express.json()
 )
@@ -24,7 +28,6 @@ app.use (
 //routes
 app.get (
     '/hello', (req,res) => {
-        console.log(req);
         res.send (
             "server app here, basic setup inhere..."
         )
@@ -36,6 +39,9 @@ app.use (
     "/api/v1/tasks", userRoute
 )
 
+app.use(
+    notfound
+)
 //connect db function
 let start = async () => {
     try {
