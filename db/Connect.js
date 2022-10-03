@@ -12,7 +12,7 @@ import mongoose from "mongoose";
 export let connectDB = (url) => {
     return (
         mongoose.connect(url)
-        .then(()=>console.log("connected to the db..."))
+        .then(()=>console.log("connected to the Mongodb...OK"))
         .catch((err)=>console.log(err))
     )
 }

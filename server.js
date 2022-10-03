@@ -39,15 +39,12 @@ app.use (
     "/api/v1/tasks", userRoute
 )
 
-app.use(
-    notfound
-)
 //connect db function
 let start = async () => {
     try {
         await connectDB(process.env.connectionString)
         app.listen (
-            port, console.log(`Server up & running listening to port ${port} :)`)
+            port, console.log(`Server up & running listening to port ${port} ...OK`)
         )
     }
     catch (err) {
