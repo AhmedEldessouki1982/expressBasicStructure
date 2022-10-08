@@ -7,7 +7,8 @@ $ npm install multer --save
 import express from 'express';
 const app = express ();
 import {userRoute} from './routes/tasks.js';
-import { connectDB } from './db/Connect.js';
+import {authRoute} from './JWT/jwtRoute/jwtRoute.js'
+import {connectDB} from './db/Connect.js';
 import './db/Connect.js';
 //importing and configuring the dot
 import * as dotenv from 'dotenv';
@@ -16,8 +17,6 @@ dotenv.config();
 import notfound from './middleware/notFound.js'
 //port
 const port = process.env.backEndPort || 8000;
-
-
 
 //middleware code
 
@@ -37,6 +36,10 @@ app.get (
 //define the url for the api
 app.use (
     "/api/v1/tasks", userRoute
+)
+
+app.use(
+    "/api/v1/users", authRoute
 )
 
 //connect db function
