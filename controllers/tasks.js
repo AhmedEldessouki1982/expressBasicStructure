@@ -1,5 +1,7 @@
 //this include all crud action in same component
 import { theSchema } from "../models/task.js";
+//import error handlling function
+import errorHandlling from "../error/errorHandlling.js";
 
 //get req
 //in the get crud operation we can use the quey methods of the mongoose
@@ -16,6 +18,7 @@ export const getAllTasks = async (req,res) => {
         )
         
     } catch (error) {
+        let theCatchedError = errorHandlling (error);
         res.status(500).json({msg: error})        
     }
     // res.send(
@@ -35,7 +38,8 @@ export const createTask = async (req,res) => {
         )
         
     } catch (error) {
-        res.status(500).json({msg: "error"})             
+        let theCatchedError = errorHandlling (error);
+        res.status(500).json({theCatchedError})             
     }
 }
 
