@@ -2,6 +2,7 @@
 //setup the model (collection)
 
 import mongoose from "mongoose";
+import dcrypt from "bcrypt"
 
 // let schema = {
 //     name: String,
@@ -33,7 +34,21 @@ let schema = {
     }
 }
 
+
 const TaskSchema = new mongoose.Schema(schema);
+
+//hashed password using dcrypt package
+//using mongoos middleware or hooks
+TaskSchema.pre("save", async function (next){
+    try {
+        const salt = await dcrypt.genSalt(10);
+        this.password = await dcrypt.hash(this.password, salt);
+
+    } catch (error) {
+        
+    }
+    next()
+})
 
 export const theSchema =  mongoose.model (
     "TaskSchema",
